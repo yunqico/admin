@@ -1,0 +1,59 @@
+{extend name="index/index"}
+
+{block name="body"}
+<div class="login-containers">
+    <div class="login">
+        <div class="brand">
+            <h1 class="logo"><img src=""></h1>
+            <h2 class="brand-text">{:sysconf('app_name')}管理后台</h2>
+        </div>
+        <form data-login-form onsubmit="return false" method="post" class="layui-anim layui-anim-upbit" autocomplete="off">
+        <div class="form-item">
+            <label><i class="textfont">登录账号：</i></label>
+            <div class="form-input">
+                <input placeholder="请输入登陆账号" name="username" clearable="true" class="ivu-input ivu-input-default" required pattern="^\S{4,}$">
+                <div class="Validform_checktip"></div>
+            </div>
+        </div>
+        <div class="form-item">
+            <label><i class="textfont">登陆密码：</i></label>
+            <div class="form-input">
+                <input type="password" class="ivu-input ivu-input-default" placeholder="请输入密码" name="password" required pattern="^\S{4,}$" maxlength="32">
+                <div class="Validform_checktip"></div>
+            </div>
+        </div>
+        <div class="form-item verify">
+            <label>验证码：</label>
+            <div class="form-input" style="width: 178px;">
+                <input class="ivu-input ivu-input-default" required pattern="^\S{4,}$" name="verify" maxlength="4" autocomplete="off" placeholder="验证码" title="请输入验证码" value="">
+            </div>
+            <div class="captcha-pr" data-captcha="{:url('admin/login/captcha',[],true)}" data-field-verify="verify" data-field-uniqid="uniqid" data-captcha-type="{$captchaType}" data-captcha-token="{$captchaToken}"></div>
+        </div>
+        <div class="form-btn">
+            <button type="submit" class="layui-btn layui-btn-normal layui-btn-fluid layui-btn-lg" data-form-loaded="立即登入">正在载入</button>
+        </div>
+        </form>
+    </div>
+    <div class="footer notselect">
+        <p class="layui-hide-xs"><a target="_blank" href="https://www.google.cn/chrome">推荐使用谷歌浏览器</a></p>
+        {if sysconf('miitbeian')}<a target="_blank" href="http://beian.miit.gov.cn">{:sysconf('miitbeian')}</a>{/if}
+    </div>
+</div>
+{/block}
+
+{block name='style'}
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<script>if (location.href.indexOf('#') > -1) location.replace(location.href.split('#')[0])</script>
+<link rel="stylesheet" href="__ROOT__/static/theme/css/login.css">
+<link rel="stylesheet" href="__ROOT__/static/theme/css/iview.css">
+<style type="text/css">
+body{background-image:url(__ROOT__/static/wallpage/bg_{:rand(1,8)}.jpg);background-size: cover;}
+.brand .logo{text-align: center;}
+.label-required:after, .label-required-next:after{content: "";}
+</style>
+{/block}
+
+{block name='script'}
+<script src="__ROOT__/static/login.js"></script>
+<script src="__ROOT__/static/plugs/supersized/supersized.3.2.7.min.js"></script>
+{/block}

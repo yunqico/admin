@@ -1,0 +1,98 @@
+{extend name="main"}
+{block name="content"}
+<style type="text/css">
+.number{font-size: 36px;line-height: 36px;color: #666;overflow: hidden;padding: 5px 0 10px;text-overflow: ellipsis;word-break: break-all;white-space: nowrap;}
+</style>
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header"><b>会员总人数</b></div>
+            <div class="layui-card-body">
+                <p class="number">9,999,666</p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header"><b>课程总数</b></div>
+            <div class="layui-card-body">
+                <p class="number">9,999,666</p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header"><b>直播总场数</b></div>
+            <div class="layui-card-body">
+                <p class="number">9,999,666</p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header"><b>交易总订单</b></div>
+            <div class="layui-card-body">
+                <p class="number">9,999,666</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-card" style="margin-top: 15px;">
+    <div class="layui-card-header notselect"><b>一周概况</b></div>
+    <div class="layui-card-body">
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">会员增长</li>
+                <li>课程增长</li>
+                <li>订单增长</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show"><div id="stat_json_week_member" class="w100pre close_float" style="height:360px"></div></div>
+                <div class="layui-tab-item"><div id="stat_json_week_goods" class="w100pre close_float" style="height:360px"></div></div>
+                <div class="layui-tab-item"><div id="stat_json_week_order" class="w100pre close_float" style="height:360px"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="layui-card" style="margin-top: 15px;">
+    <div class="layui-card-header notselect">
+        <b>系统信息</b><span class="color-desc font-s12 padding-left-5">System Information</span>
+    </div>
+    <div class="layui-card-body">
+        <table class="layui-table" lay-even>
+            <tbody>
+            <tr>
+                <td class="nowrap text-center">核心框架</td>
+                <td><a target="_blank" href="https://www.thinkphp.cn">ThinkPHP Version {:app()->version()}</a></td>
+            </tr>
+            <tr>
+                <td class="nowrap text-center">服务器信息</td>
+                <td>{:php_uname()}</td>
+            </tr>
+            <tr>
+                <td class="nowrap text-center">服务器软件</td>
+                <td>{:request()->server('SERVER_SOFTWARE',php_sapi_name())}</td>
+            </tr>
+            <tr>
+                <td class="nowrap text-center">PHP 版本</td>
+                <td>PHP Version {$Think.const.PHP_VERSION}</td>
+            </tr>
+            <tr>
+                <td class="nowrap text-center">MySQL 版本</td>
+                <td>MySQL Version {:app()->db->query('SELECT VERSION()')[0]['VERSION()']}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{/block}
+
+{block name='script'}
+<script type="text/javascript">
+    $("#stat_json_week_member").highcharts({"xAxis":{"categories":["\u5468\u4e00","\u5468\u4e8c","\u5468\u4e09","\u5468\u56db","\u5468\u4e94","\u5468\u516d","\u5468\u65e5"]},"series":[{"name":"\u4e0a\u5468","data":[0,0,1,0,0,0,0]},{"name":"\u672c\u5468","data":[0,0,0,0,0,0,0]}],"title":{"text":"<b>\u65b0\u589e\u4f1a\u5458\u7edf\u8ba1<\/b>","x":-20},"chart":{"type":"line"},"colors":["#058DC7","#ED561B","#8bbc21","#0d233a"],"credits":{"enabled":false},"exporting":{"enabled":false},"yAxis":{"title":{"text":"\u65b0\u589e\u4f1a\u5458\u6570"}}});
+
+    $("#stat_json_week_goods").highcharts({"xAxis":{"categories":["\u5468\u4e00","\u5468\u4e8c","\u5468\u4e09","\u5468\u56db","\u5468\u4e94","\u5468\u516d","\u5468\u65e5"]},"series":[{"name":"\u4e0a\u5468","data":[0,0,0,0,0,0,0]},{"name":"\u672c\u5468","data":[0,0,0,0,0,0,0]}],"title":{"text":"<b>\u65b0\u589e\u8bfe\u7a0b\u7edf\u8ba1<\/b>","x":-20},"chart":{"type":"line"},"colors":["#058DC7","#ED561B","#8bbc21","#0d233a"],"credits":{"enabled":false},"exporting":{"enabled":false},"yAxis":{"title":{"text":"\u65b0\u589e\u5546\u54c1\u6570"}}});
+
+    $("#stat_json_week_order").highcharts({"xAxis":{"categories":["\u5468\u4e00","\u5468\u4e8c","\u5468\u4e09","\u5468\u56db","\u5468\u4e94","\u5468\u516d","\u5468\u65e5"]},"series":[{"name":"\u4e0a\u5468","data":[0,0,0,0,0,0,0]},{"name":"\u672c\u5468","data":[0,0,0,0,0,0,0]}],"title":{"text":"<b>\u65b0\u589e\u8ba2\u5355\u7edf\u8ba1<\/b>","x":-20},"chart":{"type":"line"},"colors":["#058DC7","#ED561B","#8bbc21","#0d233a"],"credits":{"enabled":false},"exporting":{"enabled":false},"yAxis":{"title":{"text":"\u65b0\u589e\u8ba2\u5355\u6570"}}});
+</script>
+{/block}
